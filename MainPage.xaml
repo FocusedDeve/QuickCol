@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickCol.MainPage"
+             xmlns:local="clr-namespace:QuickCol"
+             xmlns:viewModels="clr-namespace:QuickCol.ViewModels">
+
+    <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+        <!-- CarouselView pour afficher les éléments -->
+        <CarouselView x:Name="CarouselView" ItemsSource="{Binding CarousselItems}" IndicatorView="Indicator" Loop="False">
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="local:CarousselItem">
+                    <Grid RowDefinitions="Auto, Auto, Auto" RowSpacing="10" Padding="20">
+
+                        <!-- Image vue en premier -->
+                        <Image Source="{Binding Image}"
+                               HeightRequest="250"
+                               Aspect="AspectFill"
+                               VerticalOptions="Start"
+                               HorizontalOptions="CenterAndExpand"
+                               Grid.Row="0" />
+
+                        <!-- Titre en deuxième -->
+                        <Label Text="{Binding Title}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Start"
+                               TextColor="Black"
+                               Grid.Row="1" />
+
+                        <!-- Description en dernier -->
+                        <Label Text="{Binding Description}"
+                               FontSize="16"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Start"
+                               TextColor="Gray"
+                               Grid.Row="2"
+                               LineBreakMode="WordWrap"
+                               MaxLines="3"
+                               Margin="10,0,10,0"/>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- IndicatorView pour le CarouselView -->
+        <IndicatorView x:Name="Indicator" 
+                       VerticalOptions="End"
+                       HorizontalOptions="Center"
+                       IndicatorColor="LightGray"
+                       SelectedIndicatorColor="Green"
+                       IndicatorSize="10" 
+                       Margin="0,10" />
+
+        <!-- Bouton COMMENCER visible seulement sur le dernier slide -->
+        <Button x:Name="CommencerButton"
+                Text="COMMENCER"
+                FontSize="18"
+                BackgroundColor="Green"
+                TextColor="White"
+                HorizontalOptions="Start"
+                VerticalOptions="End"
+                Margin="10,20"
+                IsVisible="False" 
+                Clicked="OnCommencerButtonClicked"/>
+    </StackLayout>
+
+</ContentPage>

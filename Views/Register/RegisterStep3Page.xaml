@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickCol.Views.Register.RegisterStep3Page"
+             xmlns:viewModels="clr-namespace:QuickCol.ViewModels"
+             Title="Register - Step 1">
+    <ContentPage.BindingContext>
+        <viewModels:RegisterViewModel />
+    </ContentPage.BindingContext>
+
+    <StackLayout>
+        <Label Text="Step 1: Enter your basic information" />
+        <Entry Placeholder="First Name" Text="{Binding FirstName}" />
+        <Entry Placeholder="Last Name" Text="{Binding LastName}" />
+        <Button Text="Next" Command="{Binding NextCommand}" />
+    </StackLayout>
+</ContentPage>
