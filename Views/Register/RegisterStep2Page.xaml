@@ -34,7 +34,7 @@
 
             <Frame CornerRadius="8" BorderColor="White" Padding="10" HasShadow="True">
                 <Entry 
-                    Text="{Binding Username}" 
+                    Text="{Binding CodeClient}" 
                     Placeholder="Code Client"
                     VerticalOptions="Center"
                     BackgroundColor="Transparent" 
@@ -42,29 +42,29 @@
                     FontSize="Medium" />    
             </Frame>
 
-            <!-- Bouton Suivant -->
-            <Button Text="tontine sur 1 mois" Command="{Binding NextCommand}" 
+            <!-- options 1 mois -->
+            <Button Text="tontine sur 1 mois" Command="{Binding TontineUnMoisCommand}" 
                     FontSize="Medium" 
                     BackgroundColor="Green" 
                     TextColor="White" 
                     CornerRadius="8" 
                     Padding="15" />
 
-            <!-- Bouton Suivant -->
-            <Button Text="Tontine sur 15 jours" Command="{Binding NextCommand}" 
-          FontSize="Medium" 
-          BackgroundColor="Green" 
-          TextColor="White" 
-          CornerRadius="8" 
-          Padding="15" />
+            <!-- option 15 jours -->
+            <Button Text="Tontine sur 15 jours" Command="{Binding Tontine15JoursCommand}" 
+                      FontSize="Medium" 
+                      BackgroundColor="Green" 
+                      TextColor="White" 
+                      CornerRadius="8" 
+                      Padding="15" />
 
             <!-- Bouton Suivant -->
             <Button Text="Suivant" Command="{Binding NextCommand2}" 
-FontSize="Medium" 
-BackgroundColor="Blue" 
-TextColor="White" 
-CornerRadius="8" 
-Padding="15" />
+                FontSize="Medium" 
+                BackgroundColor="Blue" 
+                TextColor="White" 
+                CornerRadius="8" 
+                Padding="15" />
 
         </StackLayout>
     </ScrollView>

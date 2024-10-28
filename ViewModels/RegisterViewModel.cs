@@ -1,58 +1,72 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using QRCoder;
+using System.IO;
 
 namespace QuickCol.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {
-        private string firstName;
-        private string lastName;
-        private string email;
-        private string phone;
+        private string nom;
+        private string prenoms;
+        private string adresse;
+        private string telephone;
+        private string codeClient;
         private string password;
         private string confirmPassword;
         private bool isBusy;
+        private ImageSource _qrCodeImageSource;
 
-        public string FirstName
+        public string Nom
         {
-            get => firstName;
+            get => nom;
             set
             {
-                firstName = value;
+                nom = value;
                 OnPropertyChanged();
             }
         }
 
-        public string LastName
+        public string Prenoms
         {
-            get => lastName;
+            get => prenoms;
             set
             {
-                lastName = value;
+                prenoms = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Email
+        public string Telephone
         {
-            get => email;
+            get => telephone;
             set
             {
-                email = value;
+                telephone = value;
                 OnPropertyChanged();
             }
         }
 
-        public string Phone
+        public string CodeClient
         {
-            get => phone;
+            get => codeClient;
             set
             {
-                phone = value;
+                codeClient = value;
                 OnPropertyChanged();
             }
         }
 
+        public string Adresse
+        {
+            get => adresse;
+            set
+            {
+                adresse = value;
+                OnPropertyChanged();
+            }
+        }
         public string Password
         {
             get => password;
@@ -73,6 +87,17 @@ namespace QuickCol.ViewModels
             }
         }
 
+
+        public ImageSource QrCodeImageSource
+        {
+            get => _qrCodeImageSource;
+            set
+            {
+                _qrCodeImageSource = value;
+                OnPropertyChanged(nameof(QrCodeImageSource));
+            }
+        }
+
         public bool IsBusy
         {
             get => isBusy;
@@ -85,109 +110,83 @@ namespace QuickCol.ViewModels
 
         public ICommand NextCommand { get; }
         public ICommand RegisterCommand { get; }
-
+        public ICommand QrCodeCommand { get; }
         public ICommand ClientCommand { get; }
         public ICommand AgentCommand { get; }
         public ICommand NextCommand2 { get; }
 
         public RegisterViewModel()
         {
-            NextCommand = new Command(OnNextClicked);
-            RegisterCommand = new Command(OnRegisterClicked);
+            NextCommand = new Command(() => OnNextClicked());
+            RegisterCommand = new Command(() => OnRegisterClicked());
+            ClientCommand = new Command(() => OnClientClicked());
+            AgentCommand = new Command(() => OnAgentClicked());
+            NextCommand2 = new Command(() => OnCommand2Clicked());
+            QrCodeCommand = new Command(() => OnCodeQrCommand());
 
-            ClientCommand = new Command(OnClientClicked);
-            AgentCommand = new Command(OnAgentClicked);
-
-            NextCommand2 = new Command(OnCommand2Clicked);
         }
 
-        private async void OnCommand2Clicked(object obj)
+        private void OnCodeQrCommand()
         {
-            if (IsBusy)
-                return;
-
-            IsBusy = true; // Active l'indicateur de chargement
-
-            // Simule une action longue (par exemple une navigation ou appel à une API)
-            await Task.Delay(1000);
-
-            IsBusy = false; // Désactive l'indicateur de chargement
-
-            // Naviguer vers la page suivante
-            await Shell.Current.GoToAsync("RegisterStep3Page");
-        }
-
-        private async void OnAgentClicked()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true; // Active l'indicateur de chargement
-
-            // Simule une action longue (par exemple une navigation ou appel à une API)
-            await Task.Delay(1000);
-
-            IsBusy = false; // Désactive l'indicateur de chargement
-
-            // Naviguer vers la page suivante
-            await Shell.Current.GoToAsync("AgentRegisterPage");
-        }
-
-        private async void OnClientClicked()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true; // Active l'indicateur de chargement
-
-            // Simule une action longue (par exemple une navigation ou appel à une API)
-            await Task.Delay(1000);
-
-            IsBusy = false; // Désactive l'indicateur de chargement
-
-            // Naviguer vers la page suivante
-            await Shell.Current.GoToAsync("RegisterStep1Page");
-        }
-
-        private async void OnNextClicked()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true; // Active l'indicateur de chargement
-
-            // Simule une action longue (par exemple une navigation ou appel à une API)
-            await Task.Delay(1000);
-
-            IsBusy = false; // Désactive l'indicateur de chargement
-
-            // Naviguer vers la page suivante
-            await Shell.Current.GoToAsync("RegisterStep2Page");
-        }
-
-        private async void OnRegisterClicked()
-        {
-            if (IsBusy)
-                return;
-
-            // Vérifier la correspondance des mots de passe
-            if (Password == ConfirmPassword)
+            try
             {
-                IsBusy = true;
+                Console.WriteLine("Début de la génération du QR code...");
 
-                // Simuler l'enregistrement de l'utilisateur (API ou base de données)
-                await Task.Delay(1000);
+                string dataToEncode = $"{Nom};{Prenoms};{Telephone};{Adresse};{CodeClient};{Password};{ConfirmPassword}";
+                Console.WriteLine($"Données à encoder : {dataToEncode}");
 
-                IsBusy = false;
+                using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+                using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(dataToEncode, QRCodeGenerator.ECCLevel.Q))
+                using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
+                {
+                    byte[] qrCodeImage = qrCode.GetGraphic(20);
+                    Console.WriteLine("QR code généré avec succès.");
 
-                // Naviguer vers la page principale
-                await Shell.Current.GoToAsync("//MainPage");
+                    QrCodeImageSource = ImageSource.FromStream(() => new MemoryStream(qrCodeImage));
+                    Console.WriteLine("Image QR code assignée à la source.");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                // Afficher un message d'erreur (vous pouvez utiliser un dialogue ou un label d'erreur lié au ViewModel)
+                Console.WriteLine($"Erreur lors de la génération du QR code : {ex.Message}");
+            }
+        }
+
+
+
+        private async Task ExecuteCommandAsync(Func<Task> command)
+        {
+            if (IsBusy)
+                return;
+
+            IsBusy = true;
+            await command();
+            IsBusy = false;
+        }
+
+        private Task OnNextClicked() => ExecuteCommandAsync(async () => await Shell.Current.GoToAsync("RegisterStep2Page"));
+
+        private Task OnRegisterClicked() => ExecuteCommandAsync(async () =>
+        {
+            if (Password != ConfirmPassword)
+            {
                 await Application.Current.MainPage.DisplayAlert("Erreur", "Les mots de passe ne correspondent pas.", "OK");
+                return;
             }
+
+            await Task.Delay(1000); // Simuler l'enregistrement
+
+            await Shell.Current.GoToAsync("//MainPage");
+        });
+
+        private Task OnClientClicked() => ExecuteCommandAsync(async () => await Shell.Current.GoToAsync("RegisterStep1Page"));
+        private Task OnAgentClicked() => ExecuteCommandAsync(async () => await Shell.Current.GoToAsync("AgentRegisterPage"));
+        private Task OnCommand2Clicked() => ExecuteCommandAsync(async () => await Shell.Current.GoToAsync("RegisterStep3Page"));
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

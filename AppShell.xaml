@@ -14,7 +14,6 @@
     <ShellContent Route="RegisterStep1Page" ContentTemplate="{DataTemplate viewr:RegisterStep1Page}" />
     <ShellContent Route="RegisterStep2Page" ContentTemplate="{DataTemplate viewr:RegisterStep2Page}" />
     <ShellContent Route="RegisterStep3Page" ContentTemplate="{DataTemplate viewr:RegisterStep3Page}" />
-    <ShellContent Route="RegisterStep3Page" ContentTemplate="{DataTemplate viewr:AgentRegisterPage}" />
 
 
 </Shell>

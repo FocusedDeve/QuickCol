@@ -73,7 +73,7 @@
                            Grid.Column="1"
                            Margin="10,0,0,0">
                         <Image.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+                            <TapGestureRecognizer Command="{Binding PasswordVisibilityCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>

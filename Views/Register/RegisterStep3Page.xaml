@@ -5,19 +5,31 @@
              xmlns:viewModels="clr-namespace:QuickCol.ViewModels"
              Title="Register - Step 1"
              BackgroundColor="#D4DBE3">
+    
     <ContentPage.BindingContext>
         <viewModels:RegisterViewModel />
     </ContentPage.BindingContext>
 
     <StackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
-        <!-- Bouton Suivant -->
-        <Button Text="Generer un QR Code" Command="{Binding NextCommand}" 
+        <!-- Bouton de generation -->
+        <Button Text="Generer un QR Code" Command="{Binding QrCodeCommand}" 
             FontSize="Medium" 
             BackgroundColor="Green" 
             TextColor="White" 
             CornerRadius="8" 
-            Padding="20" />
+            Padding="20" 
+            />
 
-        <Label FontSize="18" Text="Vous utiliserez ce code lors des collecte pour presentez les informations liées à votre compte"/>
+
+        <Frame BorderColor="LightSlateGray" 
+        BackgroundColor="White"
+        Padding="18">
+            <Image Source="{Binding QrCodeImageSource}" 
+                   HeightRequest="200"
+                   WidthRequest="200"/>
+        </Frame>
+            
+
+                <Label FontSize="18" Text="Vous utiliserez ce code lors des collecte pour presentez les informations liées à votre compte"/>
     </StackLayout>
 </ContentPage>
