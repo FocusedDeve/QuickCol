@@ -4,8 +4,8 @@
        xmlns:views="clr-namespace:QuickCol.Views"
        xmlns:viewr="clr-namespace:QuickCol.Views.Register"
        xmlns:local="clr-namespace:QuickCol"  
-
-    x:Class="QuickCol.AppShell">
+       x:Class="QuickCol.AppShell"
+       FlyoutBehavior="Disabled">
 
     <!-- Définition des routes pour la navigation -->
     <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
@@ -14,6 +14,8 @@
     <ShellContent Route="RegisterStep1Page" ContentTemplate="{DataTemplate viewr:RegisterStep1Page}" />
     <ShellContent Route="RegisterStep2Page" ContentTemplate="{DataTemplate viewr:RegisterStep2Page}" />
     <ShellContent Route="RegisterStep3Page" ContentTemplate="{DataTemplate viewr:RegisterStep3Page}" />
+    <ShellContent Route="RegisterStep3Page" ContentTemplate="{DataTemplate viewr:AgentRegisterPage}" />
+
 
 </Shell>
 

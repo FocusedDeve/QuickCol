@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickCol.Views.Register.AgentRegisterPage"
+             Title="AgentRegisterPage"
+             BackgroundColor="#D4DBE3">
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+
+          
+
+            <!-- Titre de la section -->
+            <Label Text="Créer un compte" 
+            FontSize="20"
+            FontAttributes="Bold"
+            HorizontalOptions="StartAndExpand" 
+            TextColor="Black" 
+            Margin="3"/>
+
+           
+
+            <!-- Champ pour le nom d'utilisateur -->
+            <Label Text="Nom d'utilisateur" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Entry 
+                 Text="{Binding Username}" 
+                 Placeholder="Entrez votre nom d'utilisateur"
+                 VerticalOptions="Center"
+                 BackgroundColor="Transparent" 
+                 TextColor="Black" 
+                 FontSize="Medium" />
+            </Frame>
+
+            <Label Text="Prenoms" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Entry 
+              Text="{Binding Username}" 
+              Placeholder="Entrez votre nom d'utilisateur"
+              VerticalOptions="Center"
+              BackgroundColor="Transparent" 
+              TextColor="Black" 
+              FontSize="Medium" />
+            </Frame>
+
+            <Label Text="Adresse" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Entry 
+               Text="{Binding Username}" 
+               Placeholder="Entrez votre nom d'utilisateur"
+               VerticalOptions="Center"
+               BackgroundColor="Transparent" 
+               TextColor="Black" 
+               FontSize="Medium" />
+            </Frame>
+
+            <Label Text="Numéro Teléphone" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Entry 
+                 Text="{Binding Username}" 
+                 Placeholder="Entrez votre nom d'utilisateur"
+                 VerticalOptions="Center"
+                 BackgroundColor="Transparent" 
+                 TextColor="Black" 
+                 FontSize="Medium" />
+            </Frame>
+
+            <Label Text="Code Agent Commercial" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Entry 
+      Text="{Binding Username}" 
+      Placeholder="Entrez votre nom d'utilisateur"
+      VerticalOptions="Center"
+      BackgroundColor="Transparent" 
+      TextColor="Black" 
+      FontSize="Medium" />
+            </Frame>
+
+            <!-- Champ pour le mot de passe -->
+            <Label Text="Mot de passe" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry  
+                     Text="{Binding Password}" 
+                     IsPassword="True" 
+                     Placeholder="Entrez votre mot de passe"
+                     VerticalOptions="Center"
+                     BackgroundColor="Transparent" 
+                     TextColor="Black" 
+                     FontSize="Medium"
+                     Grid.Column="0" />
+                    <Image Source="padlock.png"
+                        WidthRequest="24"
+                        HeightRequest="24"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Grid.Column="1"
+                        Margin="10,0,0,0">
+                    </Image>
+                </Grid>
+            </Frame>
+
+            <!-- Champ pour le mot de passe -->
+            <Label Text="Confirmer Mot de passe" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="Blue" Padding="10" HasShadow="True">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry  
+         Text="{Binding Password}" 
+         IsPassword="True" 
+         Placeholder="Entrez votre mot de passe"
+         VerticalOptions="Center"
+         BackgroundColor="Transparent" 
+         TextColor="Black" 
+         FontSize="Medium"
+         Grid.Column="0" />
+                    <Image Source="padlock.png"
+            WidthRequest="24"
+            HeightRequest="24"
+            VerticalOptions="Center"
+            HorizontalOptions="End"
+            Grid.Column="1"
+            Margin="10,0,0,0">
+                    </Image>
+                </Grid>
+            </Frame>
+
+
+
+            <Button Text="Next" Command="{Binding NextCommand}" />
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

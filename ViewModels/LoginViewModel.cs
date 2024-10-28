@@ -1,5 +1,6 @@
 ﻿using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using QuickCol.Views.Register;
 
 namespace QuickCol.ViewModels
 {
@@ -29,10 +30,12 @@ namespace QuickCol.ViewModels
         }
 
         public ICommand LoginCommand { get; }
+        public ICommand GoToRegisterCommand { get; }
 
         public LoginViewModel()
         {
             LoginCommand = new Command(OnLoginClicked);
+            GoToRegisterCommand = new Command(OnGoToRegister);
         }
 
         private async void OnLoginClicked()
@@ -47,6 +50,12 @@ namespace QuickCol.ViewModels
             {
                 // Afficher un message d'erreur
             }
+        }
+
+        private async void OnGoToRegister()
+        {
+            // Redirection vers la page d'inscription
+            await Shell.Current.GoToAsync(nameof(RegisterStep1Page));
         }
     }
 }

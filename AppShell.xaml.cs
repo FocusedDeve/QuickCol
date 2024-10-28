@@ -15,6 +15,7 @@ namespace QuickCol
             Routing.RegisterRoute(nameof(RegisterStep1Page), typeof(RegisterStep1Page));
             Routing.RegisterRoute(nameof(RegisterStep2Page), typeof(RegisterStep2Page));
             Routing.RegisterRoute(nameof(RegisterStep3Page), typeof(RegisterStep3Page));
+            Routing.RegisterRoute(nameof(AgentRegisterPage), typeof(AgentRegisterPage));
         }
 
     }

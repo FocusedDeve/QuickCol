@@ -3,15 +3,69 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickCol.Views.Register.RegisterStep2Page"
              xmlns:viewModels="clr-namespace:QuickCol.ViewModels"
-             Title="Register - Step 2">
+             Title="Register - Step 2"
+             BackgroundColor="#D4DBE3">
+
     <ContentPage.BindingContext>
         <viewModels:RegisterViewModel />
     </ContentPage.BindingContext>
 
-    <StackLayout>
-        <Label Text="Step 2: Enter your basic information" />
-        <Entry Placeholder="First Name" Text="{Binding FirstName}" />
-        <Entry Placeholder="Last Name" Text="{Binding LastName}" />
-        <Button Text="Next" Command="{Binding NextCommand}" />
-    </StackLayout>
+    <ContentPage.Resources>
+        <Style TargetType="Entry">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="PlaceholderColor" Value="Gray" />
+        </Style>
+    </ContentPage.Resources>
+    
+
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+
+           
+
+            <!-- Titre de la section -->
+            <Label Text="Choisir un type de compte" 
+               FontSize="20"
+               FontAttributes="Bold"
+               HorizontalOptions="StartAndExpand" 
+               TextColor="Black" 
+               Margin="3"/>
+
+            <Frame CornerRadius="8" BorderColor="White" Padding="10" HasShadow="True">
+                <Entry 
+                    Text="{Binding Username}" 
+                    Placeholder="Code Client"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent" 
+                    TextColor="Black" 
+                    FontSize="Medium" />    
+            </Frame>
+
+            <!-- Bouton Suivant -->
+            <Button Text="tontine sur 1 mois" Command="{Binding NextCommand}" 
+                    FontSize="Medium" 
+                    BackgroundColor="Green" 
+                    TextColor="White" 
+                    CornerRadius="8" 
+                    Padding="15" />
+
+            <!-- Bouton Suivant -->
+            <Button Text="Tontine sur 15 jours" Command="{Binding NextCommand}" 
+          FontSize="Medium" 
+          BackgroundColor="Green" 
+          TextColor="White" 
+          CornerRadius="8" 
+          Padding="15" />
+
+            <!-- Bouton Suivant -->
+            <Button Text="Suivant" Command="{Binding NextCommand2}" 
+FontSize="Medium" 
+BackgroundColor="Blue" 
+TextColor="White" 
+CornerRadius="8" 
+Padding="15" />
+
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

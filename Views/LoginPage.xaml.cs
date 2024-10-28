@@ -9,6 +9,13 @@ namespace QuickCol.Views
         {
             InitializeComponent();
             BindingContext = new LoginViewModel();
+            NavigationPage.SetHasBackButton(this, false);
+
+        }
+        protected override bool OnBackButtonPressed()
+        {
+            // Retourner true pour empêcher la navigation
+            return true;
         }
     }
 }

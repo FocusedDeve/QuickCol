@@ -3,13 +3,120 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickCol.Views.LoginPage"
              xmlns:viewModels="clr-namespace:QuickCol.ViewModels"
-            Title="Login">
+             NavigationPage.HasBackButton="False"
+             BackgroundColor="#D4DBE3">
     <ContentPage.BindingContext>
         <viewModels:LoginViewModel />
     </ContentPage.BindingContext>
-    <StackLayout>
-        <Entry Placeholder="Username" Text="{Binding Username}" />
-        <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-        <Button Text="Login" Command="{Binding LoginCommand}" />
-    </StackLayout>
+
+    <ScrollView>
+        <StackLayout Padding="30" Spacing="20" VerticalOptions="CenterAndExpand">
+
+            <!-- Frame pour l'icône d'utilisateur avec Material Icon Glyph -->
+            <Frame CornerRadius="5" 
+                   BorderColor="white"
+                   Padding="10"
+                   HasShadow="True"
+                   HeightRequest="40"
+                   WidthRequest="40"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   Margin="5,20">
+                <Image Source="user.png"
+                    WidthRequest="24"
+                    HeightRequest="24"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Grid.Column="1"
+                    Margin="20,20,20,20">
+                </Image>
+            </Frame>
+
+            <!-- Titre de la page -->
+            <Label Text="Connexion" 
+                   FontSize="35"
+                   FontFamily="Bold"
+                   HorizontalOptions="StartAndExpand" 
+                   TextColor="Black" 
+                   Margin="3"/>
+
+            <!-- Champ pour le nom d'utilisateur -->
+            <Label Text="Nom d'utilisateur" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="White" Padding="10" HasShadow="True">
+                <Entry 
+                    Text="{Binding Username}" 
+                    Placeholder="Entrez votre nom d'utilisateur"
+                    VerticalOptions="Center"
+                    BackgroundColor="Transparent" 
+                    TextColor="Black" 
+                    FontSize="Medium" />
+            </Frame>
+
+            <!-- Champ pour le mot de passe -->
+            <Label Text="Mot de passe" FontSize="Subtitle" />
+            <Frame CornerRadius="8" BorderColor="White" Padding="10" HasShadow="True">
+                <Grid ColumnDefinitions="*, Auto">
+                    <Entry  
+                        Text="{Binding Password}" 
+                        IsPassword="True" 
+                        Placeholder="Entrez votre mot de passe"
+                        VerticalOptions="Center"
+                        BackgroundColor="Transparent" 
+                        TextColor="Black" 
+                        FontSize="Medium"
+                        Grid.Column="0" />
+                    <Image Source="padlock.png"
+                           WidthRequest="24"
+                           HeightRequest="24"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"
+                           Grid.Column="1"
+                           Margin="10,0,0,0">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Frame>
+
+            <!-- Lien pour mot de passe oublié -->
+            <Button Text="Mot de passe oublié ?"
+                    Command="{Binding PassworCommand}"
+                    TextColor="#2196F3"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End" 
+                    FontSize="Subtitle"/>
+
+            <!-- Bouton de connexion -->
+            <Button Text="Se connecter"
+                    Command="{Binding LoginCommand}"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    CornerRadius="8"
+                    HeightRequest="50" 
+                    FontSize="20" />
+
+            <!-- Lien pour s'inscrire -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Spacing="-10">
+                <Label Text="Vous n'avez pas de compte ?" VerticalOptions="Center" FontSize="15" />
+                <Button Text="Créer un compte"
+                        FontSize="16"
+                        Command="{Binding GoToRegisterCommand}"
+                        TextColor="#2196F3"
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="Start" />
+            </StackLayout>
+            <!-- Case à cocher pour la politique de confidentialité -->
+            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                <CheckBox x:Name="PrivacyPolicyCheckBox" 
+                          VerticalOptions="Center" 
+                          />
+                <Label Text="j'accepte la politique de confidentialité" 
+                       VerticalOptions="Center" 
+                       Margin="0"
+                       TextColor="#2196F3"
+                       />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

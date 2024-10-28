@@ -16,22 +16,22 @@ namespace QuickCol.ViewModels
         {
             CarousselItems.Add(new CarousselItem()
             {
-                Title = "hEUREUX DE VOUS REVOIR ",
-                Description ="lapp dedier à la collecte de fonds",
+                Title = "Bienvenu sur QuickCol",
+                Description ="L'application dédié à la collecte de fonds",
                 Image = "slide1.png"
             });
 
             CarousselItems.Add(new CarousselItem()
             {
-                Title = "pour les agens ",
-                Description = "lapp dedier à la collecte de fond s lorem ipsuum jhtfhctydddrxgfjxffffffjhggdcsdcdskcbkbckdsk s vjdqvc cbzekqjcq  bkqqkyfek  kfq bfulbqzbcq qbqbflqq  vnsqergggxxxxxxxxxxxxxxxxxxxxxxxn wg wx",
+                Title = "Pour les Agents de collecte",
+                Description = "Planifier vos rendez-vous en créant votre itinéraire, Scanner le QR code des client et procedez à une collecte",
                 Image = "slide1.png"
             });
 
             CarousselItems.Add(new CarousselItem()
             {
-                Title = "pour LES CLIENTS ",
-                Description = "lapp dedier à la collecte de fonds",
+                Title = "Espace Client",
+                Description = "Creer votre compte pour faciliter l'accès aux informations à votre agent commercial, Planifer vos Rendez-vous",
                 Image = "slide1.png"
             });
         }
