@@ -3,22 +3,33 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using QRCoder;
 using System.IO;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace QuickCol.ViewModels
 {
-    public class RegisterViewModel : BaseViewModel
+    public partial class RegisterViewModel : BaseViewModel
     {
+        [ObservableProperty]
         private string nom;
+        [ObservableProperty]
         private string prenoms;
+        [ObservableProperty]
         private string adresse;
+        [ObservableProperty]
         private string telephone;
+        [ObservableProperty]
         private string codeClient;
+        [ObservableProperty]
         private string password;
+        [ObservableProperty]
         private string confirmPassword;
+        [ObservableProperty]
         private bool isBusy;
+
+        [ObservableProperty]
         private ImageSource _qrCodeImageSource;
 
-        public string Nom
+       /* public string Nom
         {
             get => nom;
             set
@@ -106,7 +117,7 @@ namespace QuickCol.ViewModels
                 isBusy = value;
                 OnPropertyChanged();
             }
-        }
+        }*/
 
         public ICommand NextCommand { get; }
         public ICommand RegisterCommand { get; }
@@ -124,34 +135,48 @@ namespace QuickCol.ViewModels
             NextCommand2 = new Command(() => OnCommand2Clicked());
             QrCodeCommand = new Command(() => OnCodeQrCommand());
 
+            Nom = "TestNom";
+            Prenoms = "TestPrenoms";
+            Telephone = "0000000000";
+            Adresse = "TestAdresse";
+            CodeClient = "123456";
+            Password = "testpassword";
+            ConfirmPassword = "testpassword";
+
         }
 
         private void OnCodeQrCommand()
         {
-            try
+
+            // Forcer la mise à jour des propriétés
+            OnPropertyChanged(nameof(Nom));
+            OnPropertyChanged(nameof(Prenoms));
+            OnPropertyChanged(nameof(Telephone));
+            OnPropertyChanged(nameof(Adresse));
+            OnPropertyChanged(nameof(CodeClient));
+            OnPropertyChanged(nameof(Password));
+            OnPropertyChanged(nameof(ConfirmPassword));
+
+
+            if (string.IsNullOrWhiteSpace(Nom) || string.IsNullOrWhiteSpace(Prenoms) ||
+                string.IsNullOrWhiteSpace(Telephone) || string.IsNullOrWhiteSpace(Adresse) ||
+                string.IsNullOrWhiteSpace(CodeClient) || string.IsNullOrWhiteSpace(Password))
             {
-                Console.WriteLine("Début de la génération du QR code...");
-
-                string dataToEncode = $"{Nom};{Prenoms};{Telephone};{Adresse};{CodeClient};{Password};{ConfirmPassword}";
-                Console.WriteLine($"Données à encoder : {dataToEncode}");
-
-                using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
-                using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(dataToEncode, QRCodeGenerator.ECCLevel.Q))
-                using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
-                {
-                    byte[] qrCodeImage = qrCode.GetGraphic(20);
-                    Console.WriteLine("QR code généré avec succès.");
-
-                    QrCodeImageSource = ImageSource.FromStream(() => new MemoryStream(qrCodeImage));
-                    Console.WriteLine("Image QR code assignée à la source.");
-                }
+                Application.Current.MainPage.DisplayAlert("Erreur", "Veuillez remplir tous les champs avant de générer le QR code.", "OK");
+                return;
             }
-            catch (Exception ex)
+
+            string dataToEncode = $"{Nom};{Prenoms};{Telephone};{Adresse};{CodeClient}";
+
+            using (QRCodeGenerator qrGenerator = new QRCodeGenerator())
+            using (QRCodeData qrCodeData = qrGenerator.CreateQrCode(dataToEncode, QRCodeGenerator.ECCLevel.Q))
+            using (PngByteQRCode qrCode = new PngByteQRCode(qrCodeData))
             {
-                Console.WriteLine($"Erreur lors de la génération du QR code : {ex.Message}");
+                byte[] qrCodeImage = qrCode.GetGraphic(20);
+                QrCodeImageSource = ImageSource.FromStream(() => new MemoryStream(qrCodeImage));
+                OnPropertyChanged(nameof (QrCodeImageSource));
             }
         }
-
 
 
         private async Task ExecuteCommandAsync(Func<Task> command)

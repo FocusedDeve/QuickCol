@@ -19,17 +19,16 @@
             CornerRadius="8" 
             Padding="20" 
             />
-
-
         <Frame BorderColor="LightSlateGray" 
         BackgroundColor="White"
         Padding="18">
             <Image Source="{Binding QrCodeImageSource}" 
                    HeightRequest="200"
-                   WidthRequest="200"/>
+                   WidthRequest="200"
+                   BackgroundColor="LightGray"/>
         </Frame>
-            
-
-                <Label FontSize="18" Text="Vous utiliserez ce code lors des collecte pour presentez les informations liées à votre compte"/>
+            <Label FontSize="18" Text="Vous utiliserez ce code 
+                   lors des collecte pour presentez les informations 
+                   liées à votre compte"/>
     </StackLayout>
 </ContentPage>
